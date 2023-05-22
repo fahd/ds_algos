@@ -1,3 +1,17 @@
+// more usable than arrays, require less memory allocation up front
+// downside -> have to traverse each item in the list until you find what you're looking for
+// you have to walk the whole thing
+
+// ArrayList, you get random access. LinkedList => must traverse
+// Access is bad on LinkedList, removing is bad on ArrayLists (have to move/shift everything over)
+
+// An array does not have a capacity versus a length
+  // An array is a contiguous spot of memory
+
+// JavaScript arrays (ArrayList) with a reference to length are dynamic arrays that can be resized
+  // There are extra operations on top to kind of dynamically "accordion" your array
+  // according to what you need.
+
 class ListNode<T> {
   public value: T;
   public next: ListNode<T> | null;
