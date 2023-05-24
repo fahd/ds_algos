@@ -1,6 +1,7 @@
 // base => where we are currently at
 // recursive => requires us to walk in directions
 
+// Example
 type Point = {
   x: number;
   y: number
@@ -8,71 +9,51 @@ type Point = {
 
 const dir = [
   [-1, 0], // left
-  [1, 0],  // right
-  [0, -1], // down
-  [0, 1]   // up
+  [1, 0], // right
+  [0, -1],// up
+  [0, 1] // down
 ];
 
-function walk(
+
+function traverse(
   maze: string[],
   wall: string,
-  curr: Point,
+  current: Point,
   end: Point,
-  // boolean 2d array
   seen: boolean[][],
   path: Point[]
-): boolean { 
-  // 1. Base Case
-  // off the map
-  if (
-    (curr.x < 0 || curr.x >= maze[0].length) ||
-    (curr.y < 0 || curr.y >= maze.length)
-  ) {
-    return false;
-  }
+): boolean {
+  // Base Case
 
-  // on a wall
-  if (maze[curr.y][curr.x] === wall) {
-    return false;
-  }
+  // out of bounds
+  if (current.x >= maze[0].length || current.x < 0) return false;
+  if (current.y >= maze.length || current.y < 0) return false;
+  
+  // if we're at a wall
+  if (maze[current.y][current.x] === wall) return false;
+  
+  // already seen
+  if (seen[current.y][current.x]) return false;
 
-  // we're at the end
-  if (curr.x === end.x && curr.y === end.y) {
-    path.push(end);
+  // if we've hit the end point
+    // we know that end is valid
+  if (current.x === end.x && current.y === end.y) {
+    path.push(current);
+    seen[current.y][current.x] = true;
     return true;
-  } 
- 
-  if (seen[curr.y][curr.x]) {
-    // don't recurse on places we've already been
-    return false;
   }
-
   
-  // 3 recurse
-  // pre
-  seen[curr.y][curr.x] = true;
-  path.push(curr);
-  // post
+  path.push(current);
+  seen[current.y][current.x] = true;
+  
   for (let i = 0; i < dir.length; i++) {
-    // 4 directions
     const [x, y] = dir[i];
-    if (walk(
-      maze,
-      wall,
-      {
-        x: curr.x + x,
-        y: curr.y + y
-      },
-      end,
-      seen,
-      path
-      )) {
-        return true;
-      }
+    if (traverse(maze, wall, { x: current.x + x, y: current.y + y }, end, seen, path)) {
+      return true;
     }
-  
+  }
   path.pop();
-  
+
   return false;
 }
 
@@ -82,15 +63,16 @@ export default function solve(
   start: Point,
   end: Point
 ): Point[] {
-  const seen: boolean[][] = [];
-  const path: Point[] = [];
-  
-  // create 2D array full of falses.
-  for (let i = 0; i < maze.length; i++) {
-    seen.push(new Array(maze[0].length).fill(false));
+  const path:Point[] = [];
+  const seen:boolean[][] = [];
+
+  for (let i = 0; i < maze.length; i++){
+    let row = maze[i];
+    seen.push(new Array(row.length).fill(false));
   }
-  // traverse our array
-  walk(maze, wall, start, end, seen, path);
   
+  traverse(maze, wall, start, end, seen, path); 
+   
   return path;
 }
+ 
