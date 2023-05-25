@@ -1,4 +1,10 @@
-function walk(node: BinaryNode<number> | null, path: number[]):number[] {
+type BinaryNode<T> = {
+  value: T;
+  left: BinaryNode<T> | null;
+  right: BinaryNode<T> | null;
+}
+
+function walk(node: BinaryNode<number> | null, path: number[]): number[] {
   if (!node) return path;
      
   // recurse
