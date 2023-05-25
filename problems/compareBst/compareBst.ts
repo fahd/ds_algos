@@ -18,7 +18,8 @@ type BinaryNode<T> = {
   right: BinaryNode<T> | null;
 }
 
-function walk(a: BinaryNode<number> | null, b: BinaryNode<number> | null): boolean {  
+// my solution
+function walk_1(a: BinaryNode<number> | null, b: BinaryNode<number> | null): boolean {  
   if (a && !b || !a && b) return false;
   if (a && b) {
     if (a.value !== b.value) return false;
@@ -26,6 +27,24 @@ function walk(a: BinaryNode<number> | null, b: BinaryNode<number> | null): boole
     if (!walk(a.right, b.right)) return false;
   }
   return true;
+}
+
+ // alternative, simpler to understand
+function walk(a: BinaryNode<number> | null, b: BinaryNode<number> | null): boolean {  
+  // if this holds true throughout both trees, then that means that all the values
+  // prior to reaching null are equivalent => otherwise, we would've returned false
+
+  // have we made it to a point in both subtrees where we both can't recurse any further
+  // intimates structurally, we are the exact same
+  if (a === null && b === null) return true;
+
+  // structurally not the same
+  if (a === null || b === null) return false;
+  
+  // no value equivalence
+  if (a.value !== b.value) return false;
+
+  return walk(a.left, b.left) && walk(a.right, b.right);
 }
 
 export default function compare(a: BinaryNode<number> | null, b: BinaryNode<number> | null): boolean {
