@@ -13,7 +13,7 @@ function search(curr: BinaryNode<number> | null, needle: number): boolean {
   if (needle > curr.value) {
     return search(curr.right, needle);
   }
-  if (needle < curr.value) {
+  if (needle <= curr.value) {
     return search(curr.left, needle);
   }
 
