@@ -5,14 +5,14 @@ type BinaryNode<T> = {
 }
 
 export default function bfs(head: BinaryNode<number>, needle: number): boolean {
-  let queue = [head];
+  let queue:(BinaryNode<number> | null)[] = [head];
   let order: number[] = [];
   let bool: boolean = false;
   while (queue.length) {
     // pretend this is a shorthand for a queue. we could implement the entire queue.
     // the runtime with a javascript array is O((n times to shift items over) * (n items visited))
       // as a result, we end up with O(n^2)
-    let curr: BinaryNode<number> | undefined = queue.shift();
+    let curr: BinaryNode<number> | null | undefined = queue.shift();
     curr && order.push(curr.value);
     if (curr && curr.value === needle) bool = true;
     if (curr && curr.left) queue.push(curr.left);
