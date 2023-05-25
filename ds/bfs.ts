@@ -29,7 +29,6 @@ export default function bfs(head: BinaryNode<number>, needle: number): boolean {
 3  5   6  9
 */
 
-
 const bst = {
   value: 7,
   left: {
@@ -58,7 +57,7 @@ const bst = {
       right: null
     }
   }
-}
+} as BinaryNode<number>;
 
 console.log(
   'bfs', bfs(bst, 9)
