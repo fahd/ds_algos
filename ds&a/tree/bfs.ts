@@ -1,3 +1,5 @@
+// depth first preserves shape of traversal
+// breadth first search does not
 type BinaryNode<T> = {
   value: T;
   left: BinaryNode<T> | null;
