@@ -1,3 +1,4 @@
+
 export default class MinHeap {
   public length: number;
   private data: number[];
@@ -6,13 +7,14 @@ export default class MinHeap {
     this.data = [];
     this.length = 0;
   }
-
+  // Time -> O(logn) => complete tree at all ends, always fills from left to right. no gaps
   insert(value: number): void {
     this.data[this.length] = value;
     this.heapifyUp(this.length);
     this.length++;
   }
-
+  
+  // Time -> O(logn) => complete tree at all ends, always fills from left to right. no gaps
   delete(): number | undefined{
     // take our head
     // get it's value out
