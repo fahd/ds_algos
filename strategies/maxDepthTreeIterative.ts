@@ -17,15 +17,14 @@ class Tree<T> {
   }
 }
 
-
+// stacks are used in converting recursive functions to iterative functions
 export default function maxDepth(tree:TreeNode<number> | undefined, depth:number = 0):number {
   if (!tree) return depth;
   const stack: Array<[TreeNode<number> | undefined, number]> = [[tree, 1]]
   
   while (stack.length) {
     // as => ensure variables are treated with correct types during compilation
-    const curr = stack.pop() as [TreeNode<number> | undefined, number];
-    const [node, currDepth] = curr;
+    const [node, currDepth] = stack.pop() as [TreeNode<number> | undefined, number];
 
     depth = Math.max(depth, currDepth);
     
