@@ -18,7 +18,7 @@ class Tree<T> {
 }
 
 
-function maxDepth(tree:TreeNode<number> | undefined, depth:number = 0):number {
+export default function maxDepth(tree:TreeNode<number> | undefined, depth:number = 0):number {
   // base case => if no depth remaining, return depth
   if (!tree) return depth;
 

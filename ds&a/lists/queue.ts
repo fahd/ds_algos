@@ -9,6 +9,18 @@ type QNode<T> = {
   next?: QNode<T>;
 }
 
+// singly-linked list
+  // enqueue => O(1) if done on tail
+  // dequeue => O(1) if done on head
+
+// doubly-linked list
+  // enqueue => O(1)
+  // dequeue => O(1)
+
+// array 
+  // enqueue(unshift) => O(n) because array needs to be recreated with each addition
+  // pop => O(1)
+  
 class Queue<T> {
   public length: number;
   // private head: QNode<T> | undefined;
