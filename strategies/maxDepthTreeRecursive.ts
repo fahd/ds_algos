@@ -17,10 +17,12 @@ class Tree<T> {
   }
 }
 
+
 function maxDepth(tree:TreeNode<number> | undefined, depth:number = 0):number {
   // base case => if no depth remaining, return depth
   if (!tree) return depth;
 
+  // max is max of left or right (root, which would be 0) + 1 for the current level
   return Math.max(
     maxDepth(tree.left, depth),
     maxDepth(tree.right, depth)
