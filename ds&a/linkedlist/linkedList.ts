@@ -37,6 +37,8 @@ class LinkedList<T> implements LinkedList<T> {
     return this.count;
   }
 
+  // O(1) once we're at the parent, much better than an array
+  // especially if we are doing operations in the middle of a list
   insertAt(item: T, index: number): void {
     if (index < 0 || index > this.count) {
       throw new Error("Index out of range");
