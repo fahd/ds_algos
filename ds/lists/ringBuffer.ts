@@ -44,7 +44,7 @@ class MyCircularQueue {
       // dequeue from head
       const node = this.head;
       this.head = this.head?.next;
-
+      // if empty, head and tail (set to non-null value) should be reset
       if (this.isEmpty()) {
         this.tail = this.head = undefined;
       }
