@@ -6,13 +6,13 @@ const dirs = [
 ];
 
 const bfs = (start: [number, number], grid: string[][]) => {
-  const [y, x] = start;
-  const queue = [[y, x]];
-  grid[y][x] = '0';
+  const queue = [start];
+  // initialize current position to 0 since it is 1
+  grid[start[0]][start[1]] = '0';
   
   while (queue.length) {
     const [currY, currX] = queue.shift() as [number, number];
-
+    // queue up new directions with a position of 1, ignore 0s
     for (let i = 0; i < dirs.length; i++){
       const [dX, dY] = dirs[i];
       const nX = currX + dX;
@@ -23,11 +23,12 @@ const bfs = (start: [number, number], grid: string[][]) => {
         || nX >= grid[0].length
         || nY >= grid.length
         || grid[nY][nX] === '0'
-      ) {
-        continue;
+        ) {
+          continue;
       }
-      // since current grid item is equal to 1
+      // need to set current neighbors to 0
       grid[nY][nX] = '0';
+      // since current grid item is equal to 1
       queue.push([nY, nX]);
     }
   }
@@ -49,7 +50,6 @@ const numIslands = function (grid: string[][]): number {
   }
   return count;
 }
-
 
 const grid = [
   ["1","1","0","0","0"],
