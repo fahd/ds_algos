@@ -27,7 +27,7 @@
 // Space O(1)
 // Time O(n^2)
 function bubbleSort(arr: number[]): number[] {
-      for (let n = arr.length - 1; n > 1; n--) {
+      for (let n = arr.length; n > 1; n--) {
         for (let i = 0; i < n; i++) {
           if (arr[i] > arr[i + 1]) [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]];
         }

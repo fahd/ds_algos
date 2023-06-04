@@ -9,6 +9,13 @@ class MovingAverage {
     this.movingAverage = 0;
   }
 
+  // Time
+    // O(n) to enqueue if array
+    // O(1) to enqueue if linkedlist
+    // O(1) to pop if linkedlist
+  // Space
+    // O(n) space
+  
   next(val: number): number {
     if (this.data.length === this.size) {
       const last = this.data.pop();
