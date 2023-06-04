@@ -18,7 +18,7 @@ const dirs = [
   [-1, 0] // left
 ];
 
-function walk(
+function dfs(
   grid: string[][],
   curr: Point,
   end: Point,
@@ -43,11 +43,11 @@ function walk(
   // if on island, recurse through graph, visit surrounding nodes up to and including adjacent non-island positions
   for (let i = 0; i < dirs.length; i++){
     let [x, y] = dirs[i];
-    walk(grid, { x: curr.x + x, y: curr.y + y }, end, seen);
+    dfs(grid, { x: curr.x + x, y: curr.y + y }, end, seen);
   }
 }
 
-function numIslands(grid: string[][]): number {
+export default function numIslands(grid: string[][]): number {
   const seen: boolean[][] = new Array(grid.length).fill(false);
   let count = 0;
   for (let i = 0; i < seen.length; i++){
@@ -58,7 +58,7 @@ function numIslands(grid: string[][]): number {
       // root node triggers a dfs
       if (!seen[y][x] && grid[y][x] === '1') {
         count++;
-        walk(grid, { x, y }, { x: grid[0].length, y: grid.length }, seen)
+        dfs(grid, { x, y }, { x: grid[0].length, y: grid.length }, seen)
       }
     }
   }
