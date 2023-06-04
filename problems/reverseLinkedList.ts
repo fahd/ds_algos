@@ -5,7 +5,7 @@ type LLNode = {
 
 function reverseLinkedList(ll: LLNode): LLNode | null{
   let prev:LLNode | null = null;
-  let curr:LLcurr | null = ll;
+  let curr:LLNode | null = ll;
 
   while (curr) {
     const next:LLNode | null = curr.next; // next candidate for reversal
