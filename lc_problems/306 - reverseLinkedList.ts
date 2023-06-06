@@ -1,3 +1,5 @@
+// https://leetcode.com/problems/reverse-linked-list/
+
 type LLNode = {
   value: number;
   next: LLNode | null;

@@ -2,54 +2,73 @@
 https://leetcode.com/problems/min-stack/description/
 */
 
-type StackNode = {
-  [key:number]:number[]
-}
+/*
+  input = 6, 12, 4, 3, 30, 1, 7
+  
+  Approach 1
+  stack = [
+    [6,6],
+    [12,6],
+    [4,4],
+    [3,3],
+    [30,3],
+    [1,1],
+    [7,1]
+  ]
+  Approach 2
+  stack = [
+    6,
+    12,
+    4,
+    3,
+    30,
+    1,
+    1,
+    7
+  ]
+  minStack = [
+    6,
+    4,
+    3,
+    1,
+    1
+  ]
+*/
 
 class MinStack {
-  public min: number;
-  public stack:StackNode
-  public size: number;
+  public stack:number[]
+  public minStack:number[]
 
   constructor() {
-    this.min = Infinity;
-    this.stack = {};
-    this.size = 0;
+    this.stack = [];
+    this.minStack = [];
   }
 
   push(val: number): void {
-    this.min = Math.min(val, this.min);
-    this.stack[this.size] = [val, this.min];
-    this.size++;
+    if (!this.stack.length) {
+      this.stack.push(val);
+      this.minStack.push(val);
+      return;
+    }
+    
+    if (val <= this.minStack[this.minStack.length - 1]) {
+      this.minStack.push(val);
+    }
+    this.stack.push(val);
   }
 
   pop(): void {
-    this.size--;
-    delete this.stack[this.size];
-    if (this.size > 0) {
-      this.min = this.getMin();
-    } 
-    else {
-      this.min = Infinity;
+    if (this.minStack[this.minStack.length - 1] === this.stack[this.stack.length - 1]) {
+      this.minStack.pop();
     }
+    this.stack.pop();
   }
 
   top(): number {
-    return this.stack[this.size - 1][0];
+    return this.stack[this.stack.length - 1];
   }
 
   getMin(): number {
-    return this.stack[this.size - 1][1];
+    return this.minStack[this.minStack.length - 1];
   }
 }
-
-const stack = new MinStack();
-
-/**
-* Your MinStack object will be instantiated and called as such:
-* var obj = new MinStack()
-* obj.push(val)
-* obj.pop()
-* var param_3 = obj.top()
-* var param_4 = obj.getMin()
-*/
