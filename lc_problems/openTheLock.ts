@@ -1,3 +1,4 @@
+// #752 => https://leetcode.com/problems/open-the-lock/
 function getNextStates(combo: string): string[] {
   const newCombos: string[] = [];
 
@@ -33,26 +34,22 @@ function getNextStates(combo: string): string[] {
 
 function openLock(deadends: string[], target: string): number {
   const dead = new Set(deadends);
-  let queue:[string, number][] = [
-    ["0000", 0]
-  ];
   const seen = new Set(['0000']);
+  let queue:[string, number][] = [["0000", 0]];
 
   while (queue.length) {
-    const next: [string, number][] = [];
+    const [curr, steps] = queue.shift() as [string, number];
     
-    for (const [curr, steps] of queue) {
-      if (curr === target) return steps;
-      if (dead.has(curr)) continue;
-      
-      for (let nextCombo of getNextStates(curr)) {
-        if (seen.has(nextCombo)) continue;
-        seen.add(nextCombo);
-        next.push([nextCombo, steps + 1]);
-      }
+    if (curr === target) return steps;
+    // if we reach a roadblock, go in a different direction
+    if (dead.has(curr)) continue;
+    
+    for (let nextCombo of getNextStates(curr)) {
+      // if we've already encountered, don't bother
+      if (seen.has(nextCombo)) continue;
+      seen.add(nextCombo);
+      queue.push([nextCombo, steps + 1]);
     }
-
-    queue = next;
   }
   return -1
 };
