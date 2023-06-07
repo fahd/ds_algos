@@ -1,9 +1,4 @@
-// '(]'
-// /* 
-//   [
-//     ({
-//   ]
-// */ 
+// https://leetcode.com/problems/valid-parentheses/
 function isValid(s: string): boolean {
   const c: { [key: string]: string } = { '{': '}', '(': ')', '[': ']' }
   const r: string[] = [];
