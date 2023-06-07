@@ -1,3 +1,4 @@
+// https://leetcode.com/problems/daily-temperatures
 function dailyTemperatures(temperatures: number[]): number[] {
   const stack = [[temperatures[0], 0]];
   const o = new Array(temperatures.length).fill(0);
