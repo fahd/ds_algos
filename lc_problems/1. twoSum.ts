@@ -1,7 +1,7 @@
 // https://leetcode.com/problems/two-sum/
 
-// Time O(n)
-// Space O(n)
+// Time complexity O(n)
+// Space complexity O(n)
 
 const twoSum = (array: number[], target: number): number[] | void => {
   const map:{[key:number]: number} = {};
