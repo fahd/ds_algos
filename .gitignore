@@ -4,5 +4,4 @@ dist
 stats.json
 x_*
 *.png
-
-
+.DS_Store
