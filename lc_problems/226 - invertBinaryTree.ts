@@ -14,18 +14,21 @@
 
 // Time -> O(n)
 // Space -> O(n)
-function walk (node: TreeNode): void {
-  if (!node) return;
-  const saveLeft = node.left;
-  const saveRight = node.right;
-  node.left = saveRight;
-  node.right = saveLeft; 
-  walk(node.left);
-  walk(node.right);
-}
+
+/*
+          1
+        5   4
+      2  3  8  9
+*/
 
 function invertTree(root: TreeNode | null): TreeNode | null {
   if (!root) return null;
-  walk(root);
+
+  let left = invertTree(root.left);
+  let right = invertTree(root.right);
+
+  root.left = right;
+  root.right = left;
+
   return root;
 };
