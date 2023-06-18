@@ -3,14 +3,15 @@
 // Time complexity O(n)
 // Space complexity O(n)
 
+
+// [1,2,3,4,5]
 const twoSum = (array: number[], target: number): number[] | void => {
-  const map:{[key:number]: number} = {};
+  const set = {};
+  
   for (let i = 0; i < array.length; i++){
-    let num = array[i];
-    let diff = target - num;
-    if (!(num in map)) map[num] = i;
-    if (diff in map && map[diff] !== i) {
-      return [map[diff], i];
-    }
+    let el = array[i];
+    let diff = target - el;
+    if (set.hasOwnProperty(diff)) return [i, set[diff]];
+    if (!set.hasOwnProperty(el)) set[el] = i;
   }
 }
