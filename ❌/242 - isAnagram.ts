@@ -9,8 +9,8 @@ function isAnagram(s: string, t: string): boolean {
     let sChar = s[i];
     let tChar = t[i];
 
-    map[sChar.charCodeAt(0) - 97]++;
-    map[tChar.charCodeAt(0) - 97]--;
+    map[sChar.charCodeAt(0) + 97]++;
+    map[tChar.charCodeAt(0) + 97]--;
   }
   
   for (let i = 0; i < map.length; i++){
